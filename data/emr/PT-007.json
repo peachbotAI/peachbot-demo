@@ -1,0 +1,18 @@
+{
+  "resourceType": "PatientBundle",
+  "patient": {
+    "id": "PT-007",
+    "name": "Patient 7",
+    "age": 37,
+    "gender": "male"
+  },
+  "conditions": [],
+  "medications": [],
+  "encounters": [],
+  "allergies": [],
+  "baseline_vitals": {
+    "hr": 75,
+    "bp": 120,
+    "temp": 36.8
+  }
+}

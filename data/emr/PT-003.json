@@ -1,0 +1,52 @@
+{
+  "resourceType": "PatientBundle",
+  "patient": {
+    "id": "PT-003",
+    "name": "Patient 3",
+    "age": 30,
+    "gender": "male"
+  },
+  "conditions": [
+    {"code": "PUO", "display": "Pyrexia of Unknown Origin"},
+    {"code": "APD", "display": "Acid Peptic Disease"},
+    {"code": "GERD", "display": "Gastroesophageal Reflux Disease"}
+  ],
+  "medications": [
+    {
+      "name": "Pantoprazole",
+      "generic": "Pantoprazole",
+      "dose": "40 mg",
+      "frequency": "OD",
+      "indication": "GERD/APD"
+    },
+    {
+      "name": "Domperidone",
+      "generic": "Domperidone",
+      "dose": "10 mg",
+      "frequency": "TDS",
+      "indication": "Gastric motility"
+    },
+    {
+      "name": "Paracetamol",
+      "generic": "Acetaminophen",
+      "dose": "650 mg",
+      "frequency": "SOS",
+      "indication": "Fever"
+    }
+  ],
+  "encounters": [
+    {
+      "encounter_id": "ENC-201",
+      "type": "OPD",
+      "date": "2026-03-20",
+      "reason": "Fever (unknown origin)",
+      "outcome": "Symptomatic treatment, under evaluation"
+    }
+  ],
+  "allergies": [],
+  "baseline_vitals": {
+    "hr": 72,
+    "bp": 118,
+    "temp": 36.5
+  }
+}

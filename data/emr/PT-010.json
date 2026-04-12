@@ -1,0 +1,32 @@
+{
+  "resourceType": "PatientBundle",
+  "patient": {
+    "id": "PT-010",
+    "name": "Patient 10",
+    "age": 40,
+    "gender": "male"
+  },
+  "conditions": [],
+  "medications": [],
+  "encounters": [
+    {
+      "encounter_id": "ENC-301",
+      "type": "OPD",
+      "date": "2026-03-18",
+      "reason": "Allergic skin reaction",
+      "outcome": "Treated with antihistamines, stable"
+    }
+  ],
+  "allergies": [
+    {
+      "substance": "Unknown Drug",
+      "reaction": ["Rash", "Urticaria"],
+      "severity": "Moderate"
+    }
+  ],
+  "baseline_vitals": {
+    "hr": 75,
+    "bp": 120,
+    "temp": 36.8
+  }
+}

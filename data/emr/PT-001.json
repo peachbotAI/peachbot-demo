@@ -1,0 +1,62 @@
+{
+  "resourceType": "PatientBundle",
+  "patient": {
+    "id": "PT-001",
+    "name": "Patient 1",
+    "age": 45,
+    "gender": "male"
+  },
+  "conditions": [
+    {"code": "HTN", "display": "Hypertension"},
+    {"code": "CAD", "display": "Coronary Artery Disease"},
+    {"code": "UA", "display": "Unstable Angina"}
+  ],
+  "medications": [
+    {
+      "name": "Ecosprin",
+      "generic": "Aspirin",
+      "dose": "75 mg",
+      "frequency": "BD"
+    },
+    {
+      "name": "Clopidogrel",
+      "generic": "Clopidogrel",
+      "dose": "75 mg",
+      "frequency": "BD"
+    },
+    {
+      "name": "Metolar",
+      "generic": "Metoprolol",
+      "dose": "10 mg",
+      "frequency": "OD"
+    },
+    {
+      "name": "Sorbitrate",
+      "generic": "Isosorbide Dinitrate",
+      "dose": "5 mg",
+      "frequency": "SOS"
+    }
+  ],
+  "encounters": [
+    {
+      "encounter_id": "ENC-001",
+      "type": "OPD",
+      "date": "2026-03-10",
+      "reason": "Chest pain",
+      "outcome": "Stabilized"
+    },
+    {
+      "encounter_id": "ENC-002",
+      "type": "OBSERVATION",
+      "date": "2026-03-25",
+      "reason": "Angina episode",
+      "outcome": "Discharged with medication"
+    }
+  ],
+  "allergies": [],
+  "baseline_vitals": {
+    "hr": 80,
+    "bp": 140,
+    "temp": 37.0
+  }
+}

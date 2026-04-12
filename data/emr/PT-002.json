@@ -1,0 +1,65 @@
+{
+  "resourceType": "PatientBundle",
+  "patient": {
+    "id": "PT-002",
+    "name": "Patient 2",
+    "age": 60,
+    "gender": "female"
+  },
+  "conditions": [
+    {"code": "CKD", "display": "Chronic Kidney Disease"},
+    {"code": "CKD_STAGE_4", "display": "CKD Stage 4"}
+  ],
+  "medications": [
+    {
+      "name": "Sodium Bicarbonate",
+      "generic": "Sodium Bicarbonate",
+      "dose": "500 mg",
+      "frequency": "TDS",
+      "indication": "Metabolic acidosis in CKD"
+    },
+    {
+      "name": "Sevelamer",
+      "generic": "Sevelamer",
+      "dose": "800 mg",
+      "frequency": "TDS",
+      "indication": "Hyperphosphatemia"
+    },
+    {
+      "name": "Erythropoietin",
+      "generic": "Epoetin Alfa",
+      "dose": "4000 IU",
+      "frequency": "Weekly",
+      "indication": "Anemia of CKD"
+    },
+    {
+      "name": "Amlodipine",
+      "generic": "Amlodipine",
+      "dose": "5 mg",
+      "frequency": "OD",
+      "indication": "Hypertension control"
+    }
+  ],
+  "encounters": [
+    {
+      "encounter_id": "ENC-101",
+      "type": "OPD",
+      "date": "2026-02-15",
+      "reason": "Fatigue and edema",
+      "outcome": "Investigated for renal dysfunction"
+    },
+    {
+      "encounter_id": "ENC-102",
+      "type": "OBSERVATION",
+      "date": "2026-03-05",
+      "reason": "Worsening creatinine",
+      "outcome": "Managed conservatively, dialysis deferred"
+    }
+  ],
+  "allergies": [],
+  "baseline_vitals": {
+    "hr": 85,
+    "bp": 135,
+    "temp": 36.7
+  }
+}
