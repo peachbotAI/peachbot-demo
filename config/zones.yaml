@@ -1,0 +1,7 @@
+zones:
+  OPD:
+    capacity: 2
+  OBS:
+    capacity: 5
+  HDU:
+    capacity: 1

@@ -1,7 +1,6 @@
 # src/engine.py
 
-from typing import Dict, List
-
+from typing import Dict
 from src.models import Patient
 from src.config import (
     HR_CRITICAL,
@@ -9,10 +8,13 @@ from src.config import (
     BP_CRITICAL
 )
 
+from src.knowledge.rule_engine import RuleEngine
+
 
 class MonitoringEngine:
     def __init__(self, patients: Dict[str, Patient]):
         self.patients = patients
+        self.rule_engine = RuleEngine()
 
     # =========================
     # STRUCTURING
@@ -24,6 +26,20 @@ class MonitoringEngine:
             "bp": raw_event["vitals"]["bp"],
             "temp": raw_event["vitals"]["temp"]
         }
+    
+    # =========================
+    # analyze_clinical 
+    # =========================
+    
+    def analyze_clinical(self, patient, ehr_events):
+        # USE RULE ENGINE (FINAL FIX)
+        result = self.rule_engine.evaluate(patient, ehr_events)
+
+        issues = result.get("issues", [])
+        score = result.get("score", 0)
+        critical_flag = result.get("critical_flag", False)
+
+        return score, issues, critical_flag
 
     # =========================
     # UNDERSTANDING (Vitals)
@@ -47,34 +63,6 @@ class MonitoringEngine:
         return score, issues
 
     # =========================
-    # KNOWLEDGE + CLINICAL RULES
-    # =========================
-    def analyze_clinical(self, patient: Patient, ehr_events: List[dict]):
-        score = 0
-        issues = []
-        critical_flag = False
-
-        for event in ehr_events:
-            if event["patient_id"] != patient.patient_id:
-                continue
-
-            drug_class = event.get("class")
-
-            # 🔴 NSAID + CKD → FORCE CRITICAL
-            if drug_class == "NSAID" and "CKD" in patient.conditions:
-                issues.append("NSAID in CKD")
-                critical_flag = True
-
-            # 🟡 Saline + HTN → WARNING
-            if drug_class == "FLUID" and any(
-                c in ["HTN", "HYPERTENSION"] for c in patient.conditions
-            ):
-                score += 2  # ensures WARNING
-                issues.append("Saline in HTN")
-
-        return score, issues, critical_flag
-
-    # =========================
     # CLASSIFICATION
     # =========================
     def classify(self, total_score):
@@ -92,36 +80,63 @@ class MonitoringEngine:
         alerts = []
 
         vitals_events = sim_output["vitals"]
-        ehr_events = sim_output["ehr"]
 
         for raw in vitals_events:
             structured = self.structure_vitals(raw)
 
             patient = self.patients[structured["patient_id"]]
 
-            # Vitals analysis
+            ehr_events = sim_output["ehr"]   # 🔥 ADD THIS
+
+            # -------------------------
+            # VITALS
+            # -------------------------
             v_score, v_issues = self.analyze_vitals(structured)
 
-            # Clinical analysis
+            # -------------------------
+            # CLINICAL (RULE ENGINE)
+            # -------------------------
             c_score, c_issues, critical_flag = self.analyze_clinical(
                 patient, ehr_events
             )
 
+            # -------------------------
+            # COMBINE
+            # -------------------------
             total_score = v_score + c_score
 
-            # 🔥 Clinical override takes priority
             if critical_flag:
                 severity = "CRITICAL"
             else:
                 severity = self.classify(total_score)
 
+            # -------------------------
+            # Convert to structured issues (IMPORTANT)
+            # -------------------------
+            structured_issues = []
+
+            # Vitals issues
+            for msg in v_issues:
+                structured_issues.append({
+                    "rule_id": "VITALS",
+                    "type": "vitals",
+                    "message": msg,
+                    "severity": severity,
+                    "risk": None,
+                    "matched_entities": {},
+                    "evidence": {}
+                })
+
+            # ADD clinical issues directly (already structured)
+            structured_issues.extend(c_issues)
+
             alert = {
                 "patient_id": patient.patient_id,
                 "zone": patient.zone,
                 "severity": severity,
-                "score": total_score,
+                "score": v_score,
                 "vitals": structured,
-                "issues": v_issues + c_issues
+                "issues": structured_issues   # ALWAYS dict-based
             }
 
             alerts.append(alert)

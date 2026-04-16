@@ -1,0 +1,341 @@
+rules:
+
+  - id: DDZ-021
+    type: drug_disease
+    entities:
+      condition: CKD_STAGE_5
+      drug: Metformin
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Lactic acidosis due to impaired clearance
+      message: Metformin is contraindicated in severe renal failure
+    evidence:
+      level: A
+      sources:
+        - {title: Diabetes Care, year: 2011}
+
+  - id: DDZ-022
+    type: drug_disease
+    entities:
+      condition: ASTHMA
+      drug: BETA_BLOCKER
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Bronchospasm
+      message: Beta-blockers can trigger severe bronchospasm in asthma
+    evidence:
+      level: A
+      sources:
+        - {title: Cochrane Database, year: 2014}
+
+  - id: DDZ-023
+    type: drug_disease
+    entities:
+      condition: SYSTEMIC_FUNGAL_INFECTION
+      drug: Corticosteroids
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Exacerbation of infection
+      message: Corticosteroids worsen systemic fungal infections
+    evidence:
+      level: A
+      sources:
+        - {title: CDC Guidelines}
+
+  - id: DDZ-024
+    type: drug_disease
+    entities:
+      condition: PEPTIC_ULCER
+      drug: NSAIDs
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Perforation and hemorrhage
+      message: NSAIDs are contraindicated in active peptic ulcer disease
+    evidence:
+      level: A
+      sources:
+        - {title: Gastroenterology, year: 2009}
+
+  - id: DDZ-025
+    type: drug_disease
+    entities:
+      condition: NEUTROPENIA_HISTORY
+      drug: Clozapine
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Agranulocytosis
+      message: Clozapine is contraindicated in patients with neutropenia history
+    evidence:
+      level: A
+      sources:
+        - {title: FDA REMS Program}
+
+  - id: DDZ-026
+    type: drug_disease
+    entities:
+      condition: GOUT
+      drug: Thiazides
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Gout flare
+      message: Thiazides can worsen gout
+    evidence:
+      level: B
+      sources:
+        - {title: Ann. Rheum. Dis., year: 2012}
+
+  - id: DDZ-027
+    type: drug_disease
+    entities:
+      condition: MYASTHENIA_GRAVIS
+      drug: Gentamicin
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Neuromuscular blockade
+      message: Gentamicin worsens myasthenia gravis
+    evidence:
+      level: A
+      sources:
+        - {title: Neurology, year: 2005}
+
+  - id: DDZ-028
+    type: drug_disease
+    entities:
+      condition: VTE_HISTORY
+      drug: Estrogen
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Thromboembolism
+      message: Estrogen increases risk of thrombosis in VTE history
+    evidence:
+      level: A
+      sources:
+        - {title: Lancet, year: 2001}
+
+  - id: DDZ-029
+    type: drug_disease
+    entities:
+      condition: HTN_UNCONTROLLED
+      drug: Pseudoephedrine
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Hypertensive crisis
+      message: Pseudoephedrine may cause hypertensive emergency
+    evidence:
+      level: A
+      sources:
+        - {title: J. Clin. Pharm., year: 2007}
+
+  - id: DDZ-030
+    type: drug_disease
+    entities:
+      condition: GLAUCOMA_NARROW_ANGLE
+      drug: Anticholinergics
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Acute glaucoma attack
+      message: Anticholinergics can precipitate acute glaucoma
+    evidence:
+      level: A
+      sources:
+        - {title: Ophthalmology, year: 2010}
+
+  - id: DDZ-031
+    type: drug_disease
+    entities:
+      condition: CKD_STAGE_5
+      drug: Gadolinium
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Nephrogenic systemic fibrosis
+      message: Gadolinium is contraindicated in severe CKD
+    evidence:
+      level: A
+      sources:
+        - {title: JAMA Intern. Med., year: 2020}
+
+  - id: DDZ-032
+    type: drug_disease
+    entities:
+      condition: PREGNANCY
+      drug: Warfarin
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Fetal warfarin syndrome
+      message: Warfarin is contraindicated in pregnancy
+    evidence:
+      level: A
+      sources:
+        - {title: Thromb. Haemost., year: 2003}
+
+  - id: DDZ-033
+    type: drug_disease
+    entities:
+      condition: BPH
+      drug: Phenylephrine
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Urinary retention
+      message: Phenylephrine may worsen urinary retention in BPH
+    evidence:
+      level: B
+      sources:
+        - {title: Eur. Urol., year: 2011}
+
+  - id: DDZ-034
+    type: drug_disease
+    entities:
+      condition: MYASTHENIA_GRAVIS
+      drug: Fluoroquinolones
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Muscle weakness
+      message: Fluoroquinolones worsen myasthenia gravis
+    evidence:
+      level: A
+      sources:
+        - {title: FDA Boxed Warning, year: 2011}
+
+  - id: DDZ-035
+    type: drug_disease
+    entities:
+      condition: LIVER_DISEASE_ACTIVE
+      drug: Statin
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Hepatotoxicity
+      message: Statins should be used cautiously in active liver disease
+    evidence:
+      level: B
+      sources:
+        - {title: Liver Int., year: 2014}
+
+  - id: DDZ-036
+    type: drug_disease
+    entities:
+      condition: HEART_FAILURE_LOW_EF
+      drug: Diltiazem
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Negative inotropy worsening HF
+      message: Diltiazem is contraindicated in low EF heart failure
+    evidence:
+      level: A
+      sources:
+        - {title: NEJM, year: 1988}
+
+  - id: DDZ-037
+    type: drug_disease
+    entities:
+      condition: PEDIATRIC_VIRAL_INFECTION
+      drug: Aspirin
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Reye’s syndrome
+      message: Aspirin in children with viral illness causes Reye’s syndrome
+    evidence:
+      level: A
+      sources:
+        - {title: Pediatrics, year: 1982}
+
+  - id: DDZ-038
+    type: drug_disease
+    entities:
+      condition: C_DIFF_INFECTION
+      drug: Loperamide
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Toxic megacolon
+      message: Loperamide is contraindicated in C. difficile infection
+    evidence:
+      level: A
+      sources:
+        - {title: Clin. Infect. Dis., year: 2010}
+
+  - id: DDZ-039
+    type: drug_disease
+    entities:
+      condition: CKD_SEVERE
+      drug: Nitrofurantoin
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Reduced efficacy and toxicity
+      message: Nitrofurantoin is ineffective in severe renal impairment
+    evidence:
+      level: B
+      sources:
+        - {title: J. Am. Geriatr. Soc., year: 2015}
+
+  - id: DDZ-040
+    type: drug_disease
+    entities:
+      condition: RECENT_MI
+      drug: TCAs
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Arrhythmias
+      message: TCAs increase arrhythmia risk post-MI
+    evidence:
+      level: A
+      sources:
+        - {title: J. Clin. Psychiatry, year: 2001}
+
+  - id: DDZ-041
+    type: drug_disease
+    entities:
+      condition: HTN
+      drug: Normal Saline
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Fluid overload and worsening hypertension
+      message: Normal saline infusion may worsen hypertension and fluid overload
+    evidence:
+      level: A
+      type: guideline
+      sources:
+        - title: European Society of Cardiology Hypertension Guidelines
+          year: 2018
+        - title: Critical Care Fluid Therapy Review
+          year: 2019
+
+  - id: DDZ-042
+    type: drug_disease
+    entities:
+      condition: CKD
+      drug: NSAID
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Acute kidney injury and worsening renal function
+      message: NSAIDs are contraindicated in CKD due to reduced renal perfusion and nephrotoxicity
+    evidence:
+      level: A
+      type: guideline
+      sources:
+        - title: KDIGO Clinical Practice Guideline for Acute Kidney Injury
+          year: 2012
+        - title: National Kidney Foundation Guidelines (NKF)
+          year: 2013
+        - title: BMJ Clinical Review on NSAIDs and Renal Risk
+          year: 2017

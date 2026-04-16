@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox
+from src.utils.explain import format_issue
 import threading
 import sys
 import datetime
@@ -47,29 +48,16 @@ class PeachBotGUI:
         explanation.append("")
         explanation.append("Reason:")
 
-        issue = alert["issue"]
+        issues = alert.get("issues", [])
 
-        if "NSAID" in issue:
-            explanation.append("- NSAID prescribed")
-            explanation.append("- Patient has CKD")
-            explanation.append("- Risk: kidney injury → CRITICAL")
-
-        elif "Saline" in issue:
-            explanation.append("- Normal Saline prescribed")
-            explanation.append("- Patient has Hypertension")
-            explanation.append("- Risk: fluid overload → WARNING")
-
-        elif "High HR" in issue:
-            explanation.append("- Heart rate exceeds threshold (>120)")
-
-        elif "Fever" in issue:
-            explanation.append("- Temperature exceeds threshold (>38°C)")
-
-        elif "Low BP" in issue:
-            explanation.append("- Blood pressure below threshold (<90)")
-
+        if not issues:
+            explanation.append("- No reasoning available")
         else:
-            explanation.append(f"- {issue}")
+            for i in issues:
+                try:
+                    explanation.append(f"- {format_issue(i)}")
+                except Exception:
+                    explanation.append(f"- {str(i)}")
 
         explanation.append("")
         explanation.append("System Logic:")
@@ -332,6 +320,9 @@ class PeachBotGUI:
                 else:
                     tag = ""  # remove color → blinking
 
+            issues = a.get("issues", [])
+            text = format_issue(issues[0]) if issues else ""
+
             self.alert_table.insert(
                 "",
                 "end",
@@ -339,7 +330,7 @@ class PeachBotGUI:
                 values=(
                     a["patient_id"],
                     "⚠ " + a["severity"],
-                    a["issue"],
+                    text,
                     a["assigned_to"],
                     a["status"]
                 ),

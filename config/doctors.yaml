@@ -1,0 +1,8 @@
+doctors:
+  - id: DR-A
+    name: Dr. A
+    role: Medical Officer
+
+  - id: DR-B
+    name: Dr. B
+    role: Intensivist

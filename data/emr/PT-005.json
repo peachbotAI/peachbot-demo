@@ -6,7 +6,12 @@
     "age": 35,
     "gender": "male"
   },
-  "conditions": [],
+  "conditions": [
+    {
+      "code": "LIVER_DISEASE_ACTIVE",
+      "display": "Active Liver Disease"
+    }
+  ],
   "medications": [],
   "encounters": [],
   "allergies": [],

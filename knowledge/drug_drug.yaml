@@ -1,0 +1,303 @@
+rules:
+
+  - id: DD-001
+    type: drug_drug
+    entities:
+      drug_a: {name: Sildenafil}
+      drug_b: {name: Nitrates}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Refractory hypotension due to synergistic vasodilation
+      message: Sildenafil with nitrates can cause life-threatening hypotension
+    evidence:
+      level: A
+      type: journal
+      sources:
+        - {title: J. Am. Coll. Cardiol., year: 2004}
+
+  - id: DD-002
+    type: drug_drug
+    entities:
+      drug_a: {name: MAOIs}
+      drug_b: {name: SSRIs}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Serotonin syndrome
+      message: MAOIs with SSRIs can cause serotonin syndrome
+    evidence:
+      level: A
+      type: journal
+      sources:
+        - {title: J. Clin. Psychopharmacol., year: 2013}
+
+  - id: DD-003
+    type: drug_drug
+    entities:
+      drug_a: {name: Warfarin}
+      drug_b: {name: NSAIDs}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Major gastrointestinal bleeding
+      message: Warfarin with NSAIDs increases bleeding risk
+    evidence:
+      level: A
+      sources:
+        - {title: Arch. Intern. Med., year: 2005}
+
+  - id: DD-004
+    type: drug_drug
+    entities:
+      drug_a: {name: Clarithromycin}
+      drug_b: {name: Simvastatin}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Rhabdomyolysis
+      message: Clarithromycin with simvastatin increases rhabdomyolysis risk
+    evidence:
+      level: A
+      sources:
+        - {title: JAMA, year: 2013}
+
+  - id: DD-005
+    type: drug_drug
+    entities:
+      drug_a: {name: Spironolactone}
+      drug_b: {name: ACE Inhibitors}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Severe hyperkalemia
+      message: Spironolactone with ACE inhibitors can cause hyperkalemia
+    evidence:
+      level: A
+      sources:
+        - {title: NEJM, year: 1999}
+
+  - id: DD-006
+    type: drug_drug
+    entities:
+      drug_a: {name: Ergotamine}
+      drug_b: {name: CYP3A4 Inhibitors}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Ergotism and ischemia
+      message: Ergotamine with CYP3A4 inhibitors can cause ischemia
+    evidence:
+      level: A
+      sources:
+        - {title: FDA Drug Safety, year: 2013}
+
+  - id: DD-007
+    type: drug_drug
+    entities:
+      drug_a: {name: Lithium}
+      drug_b: {name: NSAIDs}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Lithium toxicity
+      message: NSAIDs increase lithium levels causing toxicity
+    evidence:
+      level: A
+      sources:
+        - {title: Clin. Pharmacokinet., year: 2002}
+
+  - id: DD-008
+    type: drug_drug
+    entities:
+      drug_a: {name: Digoxin}
+      drug_b: {name: Amiodarone}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Digoxin toxicity
+      message: Amiodarone increases digoxin toxicity risk
+    evidence:
+      level: A
+      sources:
+        - {title: Am. J. Cardiol., year: 1984}
+
+  - id: DD-009
+    type: drug_drug
+    entities:
+      drug_a: {name: Tramadol}
+      drug_b: {name: SSRIs}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Seizures and serotonin syndrome
+      message: Tramadol with SSRIs increases seizure risk
+    evidence:
+      level: A
+      sources:
+        - {title: Mayo Clin. Proc., year: 2007}
+
+  - id: DD-010
+    type: drug_drug
+    entities:
+      drug_a: {name: Azithromycin}
+      drug_b: {name: Pimozide}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: QT prolongation
+      message: Azithromycin with pimozide causes QT prolongation
+    evidence:
+      level: A
+      sources:
+        - {title: Circulation, year: 2013}
+
+  - id: DD-011
+    type: drug_drug
+    entities:
+      drug_a: {name: Metronidazole}
+      drug_b: {name: Alcohol}
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Disulfiram-like reaction
+      message: Metronidazole with alcohol causes severe reaction
+    evidence:
+      level: B
+      sources:
+        - {title: FDA Labeling}
+
+  - id: DD-012
+    type: drug_drug
+    entities:
+      drug_a: {name: Clopidogrel}
+      drug_b: {name: Omeprazole}
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Reduced antiplatelet effect
+      message: Omeprazole reduces clopidogrel efficacy
+    evidence:
+      level: A
+      sources:
+        - {title: NEJM, year: 2010}
+
+  - id: DD-013
+    type: drug_drug
+    entities:
+      drug_a: {name: St John's Wort}
+      drug_b: {name: Cyclosporine}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Transplant rejection
+      message: St John's Wort reduces cyclosporine levels
+    evidence:
+      level: A
+      sources:
+        - {title: Lancet, year: 2000}
+
+  - id: DD-014
+    type: drug_drug
+    entities:
+      drug_a: {name: Potassium}
+      drug_b: {name: Triamterene}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Fatal hyperkalemia
+      message: Potassium with triamterene causes hyperkalemia
+    evidence:
+      level: A
+      sources:
+        - {title: CJASN, year: 2010}
+
+  - id: DD-015
+    type: drug_drug
+    entities:
+      drug_a: {name: Theophylline}
+      drug_b: {name: Ciprofloxacin}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Theophylline toxicity
+      message: Ciprofloxacin increases theophylline levels
+    evidence:
+      level: A
+      sources:
+        - {title: Am. J. Med., year: 1987}
+
+  - id: DD-016
+    type: drug_drug
+    entities:
+      drug_a: {name: Levodopa}
+      drug_b: {name: MAOIs}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Hypertensive crisis
+      message: Levodopa with MAOIs causes hypertensive crisis
+    evidence:
+      level: A
+      sources:
+        - {title: Mov. Disord., year: 2011}
+
+  - id: DD-017
+    type: drug_drug
+    entities:
+      drug_a: {name: Rifampin}
+      drug_b: {name: Oral Contraceptives}
+    outcome:
+      severity: WARNING
+      score: 2
+      risk: Contraceptive failure
+      message: Rifampin reduces contraceptive effectiveness
+    evidence:
+      level: B
+      sources:
+        - {title: JAAD, year: 1996}
+
+  - id: DD-018
+    type: drug_drug
+    entities:
+      drug_a: {name: Methotrexate}
+      drug_b: {name: Trimethoprim}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Pancytopenia
+      message: Methotrexate with trimethoprim causes bone marrow suppression
+    evidence:
+      level: A
+      sources:
+        - {title: BMJ, year: 1986}
+
+  - id: DD-019
+    type: drug_drug
+    entities:
+      drug_a: {name: Calcium}
+      drug_b: {name: Ceftriaxone}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Fatal precipitation in neonates
+      message: Calcium with ceftriaxone can cause fatal reactions in infants
+    evidence:
+      level: A
+      sources:
+        - {title: FDA Safety Alert, year: 2009}
+
+  - id: DD-020
+    type: drug_drug
+    entities:
+      drug_a: {name: Allopurinol}
+      drug_b: {name: Azathioprine}
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Bone marrow suppression
+      message: Allopurinol increases azathioprine toxicity
+    evidence:
+      level: A
+      sources:
+        - {title: Arthritis Rheum., year: 2006}

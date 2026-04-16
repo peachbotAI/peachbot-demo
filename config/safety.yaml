@@ -1,0 +1,12 @@
+classification:
+  CRITICAL: 3
+  WARNING: 2
+  STABLE: 0
+
+rules:
+  force_critical:
+    - NSAID_CKD
+
+policies:
+  require_override_reason: true
+  human_in_loop: true

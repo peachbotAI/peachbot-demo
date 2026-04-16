@@ -1,0 +1,7 @@
+vitals:
+  hr:
+    high: 120
+  temp:
+    high: 38.0
+  bp:
+    low: 90

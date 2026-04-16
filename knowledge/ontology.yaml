@@ -1,0 +1,40 @@
+drug_classes:
+
+  NSAID:
+    - NSAID
+    - NSAIDs
+    - Nimesulide
+    - Diclofenac
+    - Ibuprofen
+
+  Tetracyclines:
+    - Tetracycline
+    - Tetracyclines
+
+  NITRATE:
+    - Nitroglycerin
+    - Isosorbide Dinitrate
+    - Nitrates
+
+  ACE_INHIBITOR:
+    - Enalapril
+    - Ramipril
+    - ACE_INHIBITOR
+
+  BETA_BLOCKER:
+    - Metoprolol
+    - Atenolol
+
+  SSRI:
+    - Fluoxetine
+    - Sertraline
+    - SSRIs
+
+  MAOI:
+    - Phenelzine
+    - Tranylcypromine
+    - MAOIs
+
+  STATIN:
+    - Atorvastatin
+    - Simvastatin

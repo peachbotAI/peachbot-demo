@@ -96,10 +96,22 @@ class HL7Simulator:
         events = []
 
         for pid, patient in self.patients.items():
-            # Deterministic trigger
-            if self.tick % 4 == 0:
 
-                if "CKD" in patient.conditions:
+            # -------------------------
+            # NORMALIZE CONDITIONS (CRITICAL FIX)
+            # -------------------------
+            conditions = [
+                c["code"] if isinstance(c, dict) else c
+                for c in patient.conditions
+            ]
+
+            # Deterministic trigger
+            if self.tick % 5 == 0:
+
+                # -------------------------
+                # CKD → NSAID (ADR)
+                # -------------------------
+                if "CKD" in conditions:
                     drug = "Nimesulide" if self.tick % 2 == 0 else "Diclofenac Sodium"
 
                     events.append({
@@ -109,7 +121,10 @@ class HL7Simulator:
                         "class": "NSAID"
                     })
 
-                if "HTN" in patient.conditions:
+                # -------------------------
+                # HTN → FLUID
+                # -------------------------
+                if "HTN" in conditions:
                     events.append({
                         "type": "EHR",
                         "patient_id": pid,
@@ -117,7 +132,16 @@ class HL7Simulator:
                         "class": "FLUID"
                     })
 
-        # print(f"[DEBUG EHR] {events}")
+                # -------------------------
+                # LIVER DISEASE → STATIN (ADR)
+                # -------------------------
+                if "LIVER_DISEASE_ACTIVE" in conditions:
+                    events.append({
+                        "type": "EHR",
+                        "patient_id": pid,
+                        "drug": "Atorvastatin",
+                        "class": "STATIN"
+                    })
 
         return events
 

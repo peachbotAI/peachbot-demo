@@ -1,4 +1,5 @@
 # src/alerts.py
+
 import threading
 import datetime
 from typing import Dict, List
@@ -7,25 +8,29 @@ from src.models import Doctor
 
 class AlertManager:
     def __init__(self, doctors: Dict[str, Doctor]):
-        self._lock = threading.Lock() # For thread safety
+        self._lock = threading.Lock()
         self.doctors = doctors
 
         self.alerts = {}  # alert_id → alert
-        self.active_index = {}  # (patient_id, issue) → alert_id
+        self.active_index = {}  # (patient_id, rule_id) → alert_id
 
         self.counter = 1
 
     # =========================
     # LOGGING
     # =========================
-
     def log_alert(self, alert):
         with open("logs/alerts.log", "a") as f:
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+            issues_text = "; ".join(
+                [i.get("message", "") for i in alert.get("issues", [])]
+            )
+
             f.write(
                 f"{timestamp} | {alert['id']} | {alert['patient_id']} | "
-                f"{alert['severity']} | {alert['issue']} | {alert['assigned_to']} | {alert['status']}\n"
+                f"{alert['severity']} | {issues_text} | "
+                f"{alert['assigned_to']} | {alert['status']}\n"
             )
 
     # =========================
@@ -35,7 +40,7 @@ class AlertManager:
         aid = f"ALERT-{self.counter:03d}"
         self.counter += 1
         return aid
-    
+
     # =========================
     # GET ACTIVE ALERTS
     # =========================
@@ -66,42 +71,42 @@ class AlertManager:
 
             for alert in engine_alerts:
 
-                # Ignore stable
                 if alert["severity"] == "STABLE":
                     continue
 
                 pid = alert["patient_id"]
+                issues = alert.get("issues", [])
 
-                for issue in alert["issues"]:
-                    key = (pid, issue)
+                # Dedup based on rule_id (stable)
+                # rule_ids = tuple(sorted([i.get("rule_id") for i in issues]))
 
-                    # Deduplication
-                    if key in self.active_index:
-                        continue
+                key = (pid, tuple(sorted([i.get("message") for i in issues])))
 
-                    doctor = self.assign_doctor(alert["severity"])
+                if key in self.active_index:
+                    continue
 
-                    alert_id = self._generate_id()
+                doctor = self.assign_doctor(alert["severity"])
+                alert_id = self._generate_id()
 
-                    new_alert = {
-                        "id": alert_id,
-                        "patient_id": pid,
-                        "severity": alert["severity"],
-                        "issue": issue,
-                        "zone": alert["zone"],
-                        "assigned_to": doctor.name if doctor else None,
-                        "status": "ACTIVE"
-                    }
+                new_alert = {
+                    "id": alert_id,
+                    "patient_id": pid,
+                    "severity": alert["severity"],
+                    "issues": issues,   # ONLY SOURCE
+                    "zone": alert.get("zone"),
+                    "assigned_to": doctor.name if doctor else None,
+                    "status": "ACTIVE"
+                }
 
-                    self.alerts[alert_id] = new_alert
-                    self.active_index[key] = alert_id
+                self.alerts[alert_id] = new_alert
+                self.active_index[key] = alert_id
 
-                    # Attach to doctor
-                    if doctor:
-                        doctor.active_alerts.append(alert_id)
+                # Attach to doctor
+                if doctor:
+                    doctor.active_alerts.append(alert_id)
 
-                    new_alerts.append(new_alert)
-                    self.log_alert(new_alert)
+                new_alerts.append(new_alert)
+                self.log_alert(new_alert)
 
             return new_alerts
 

@@ -1,0 +1,153 @@
+rules:
+
+  - id: DDP-041
+    type: drug_physiology
+    entities:
+      condition: PREGNANCY_2_3_TRIMESTER
+      drug: ACE_INHIBITOR
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Fetal renal failure
+      message: ACE inhibitors are contraindicated in late pregnancy
+    evidence:
+      level: A
+      sources:
+        - {title: NEJM, year: 2006}
+
+  - id: DDP-042
+    type: drug_physiology
+    entities:
+      condition: CHILD_UNDER_8
+      drug: Tetracyclines
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Permanent tooth discoloration
+      message: Tetracyclines should not be used in children under 8
+    evidence:
+      level: A
+      sources:
+        - {title: CDC/AAP Guidelines}
+
+  - id: DDP-043
+    type: drug_physiology
+    entities:
+      condition: PREGNANCY
+      drug: Misoprostol
+    context:
+      exception: INDUCED_ABORTION
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Uterine rupture or abortion
+      message: Misoprostol can induce uterine rupture in pregnancy
+    evidence:
+      level: A
+      sources:
+        - {title: Obstet. Gynecol., year: 2000}
+
+  - id: DDP-044
+    type: drug_physiology
+    entities:
+      condition: IMMUNOCOMPROMISED
+      drug: LIVE_VACCINES
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Disseminated infection
+      message: Live vaccines are contraindicated in immunocompromised patients
+    evidence:
+      level: A
+      sources:
+        - {title: CDC ACIP Recommendations}
+
+  - id: DDP-045
+    type: drug_physiology
+    entities:
+      condition: ULTRA_RAPID_METABOLIZER
+      drug: Codeine
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Fatal respiratory depression
+      message: Codeine can cause fatal respiratory depression in ultra-rapid metabolizers
+    evidence:
+      level: A
+      sources:
+        - {title: FDA Safety Communication, year: 2013}
+
+  - id: DDP-046
+    type: drug_physiology
+    entities:
+      condition: PREGNANCY_FIRST_TRIMESTER
+      drug: Lithium
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Ebstein’s anomaly
+      message: Lithium exposure in early pregnancy causes cardiac defects
+    evidence:
+      level: A
+      sources:
+        - {title: Lancet, year: 1992}
+
+  - id: DDP-047
+    type: drug_physiology
+    entities:
+      condition: FEMALE_CHILDBEARING_AGE
+      drug: Valproate
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Neural tube defects
+      message: Valproate is contraindicated in women of childbearing age
+    evidence:
+      level: A
+      sources:
+        - {title: EMA Recommendations, year: 2018}
+
+  - id: DDP-048
+    type: drug_physiology
+    entities:
+      condition: PREGNANCY
+      drug: Thalidomide
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Severe limb deformities (phocomelia)
+      message: Thalidomide is absolutely contraindicated in pregnancy
+    evidence:
+      level: A
+      sources:
+        - {title: FDA STEPS Program}
+
+  - id: DDP-049
+    type: drug_physiology
+    entities:
+      condition: PREGNANCY
+      drug: Ribavirin
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Teratogenicity
+      message: Ribavirin causes severe fetal malformations
+    evidence:
+      level: A
+      sources:
+        - {title: CDC/WHO Guidelines}
+
+  - id: DDP-050
+    type: drug_physiology
+    entities:
+      condition: SLEEP_APNEA
+      drug: Benzodiazepines
+    outcome:
+      severity: CRITICAL
+      score: 3
+      risk: Respiratory arrest
+      message: Benzodiazepines can worsen respiratory depression in sleep apnea
+    evidence:
+      level: A
+      sources:
+        - {title: J. Clin. Sleep Med., year: 2014}
