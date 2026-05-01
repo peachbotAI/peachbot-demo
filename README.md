@@ -1,4 +1,10 @@
 # PeachBot Medi (Demo)
+![PeachBot](https://img.shields.io/badge/PeachBot-Hybrid%20Edge%20AI-black)
+![Version](https://img.shields.io/badge/v0.1.0-MVP-blue)
+![License](https://img.shields.io/badge/License-Apache%202.0-green)
+![Focus](https://img.shields.io/badge/Focus-Clinical%20Intelligence-red)
+![Architecture](https://img.shields.io/badge/Architecture-Hybrid%20AI-purple)
+![Status](https://img.shields.io/badge/Stage-Early%20Deployment-orange)
 
 ### Edge-Native Clinical Intelligence Platform (Hybrid AI for Safety-Critical Systems)
 
