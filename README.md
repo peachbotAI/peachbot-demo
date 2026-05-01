@@ -5,6 +5,7 @@
 ![Focus](https://img.shields.io/badge/Focus-Clinical%20Intelligence-red)
 ![Architecture](https://img.shields.io/badge/Architecture-Hybrid%20AI-purple)
 ![Status](https://img.shields.io/badge/Stage-Early%20Deployment-orange)
+[![DOI](https://zenodo.org/badge/1208246010.svg)](https://doi.org/10.5281/zenodo.19939516)
 
 ### Edge-Native Clinical Intelligence Platform (Hybrid AI for Safety-Critical Systems)
 
