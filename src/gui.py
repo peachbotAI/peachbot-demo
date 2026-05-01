@@ -3,6 +3,11 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from src.utils.explain import format_issue
+from src.emr.create_patient import create_patient_bundle
+from src.emr.load_single import load_single_patient
+from src.ui.patient_form import PatientForm
+from src.ui.prescription_form import PrescriptionForm
+import tkinter as tk
 import threading
 import sys
 import datetime
@@ -66,6 +71,40 @@ class PeachBotGUI:
         # render
         self.explain_box.delete("1.0", tk.END)
         self.explain_box.insert("end", "\n".join(explanation))
+
+    def simulate_patient_arrival(self):
+        form = PatientForm(
+            self.root,
+            self.patients,
+            self.refresh
+        )
+        form.open()
+
+    def prescribe_drug(self):
+        if not hasattr(self, "selected_patient_id") or not self.selected_patient_id:
+            return
+
+        patient = self.patients[self.selected_patient_id]
+
+        form = PrescriptionForm(
+            self.root,
+            patient,
+            self.rule_engine,
+            self.alert_manager,
+            self.refresh,
+            self.log_action
+        )
+        form.open()
+
+    def on_patient_select(self, event):
+        selected = self.patient_table.selection()
+
+        if not selected:
+            self.selected_patient_id = None
+            return
+
+        item = self.patient_table.item(selected[0])
+        self.selected_patient_id = item["values"][0]  # patient_id
     # =========================
     # UI SETUP
     # =========================
@@ -133,16 +172,27 @@ class PeachBotGUI:
 
         self.patient_table = ttk.Treeview(
             patient_card,
-            columns=("zone", "hr", "bp", "temp"),
+            columns=("id", "name", "zone", "hr", "bp", "temp"),
             show="headings",
             height=5
         )
 
-        for col in ("zone", "hr", "bp", "temp"):
+        for col in ("id", "name", "zone", "hr", "bp", "temp"):
             self.patient_table.heading(col, text=col.upper())
-            self.patient_table.column(col, anchor="center", width=70)
+            if col == "id":
+                self.patient_table.column(col, width=80, anchor="center")
+
+            elif col == "name":
+                self.patient_table.column(col, width=160, anchor="w")
+
+            elif col == "zone":
+                self.patient_table.column(col, width=80, anchor="center")
+
+            else:
+                self.patient_table.column(col, width=80, anchor="center")
 
         self.patient_table.pack(fill="both", expand=True, padx=5, pady=3)
+        self.patient_table.bind("<<TreeviewSelect>>", self.on_patient_select)
 
         # DOCTORS
         doctor_card = tk.Frame(top, bg="#111827")
@@ -175,15 +225,26 @@ class PeachBotGUI:
 
         self.alert_table = ttk.Treeview(
             alert_card,
-            columns=("patient", "severity", "issue", "doctor", "status"),
+            columns=("patient", "severity", "doctor", "status"),
             show="headings"
         )
 
-        for col in ("patient", "severity", "issue", "doctor", "status"):
+        for col in ("patient", "severity", "doctor", "status"):
             self.alert_table.heading(col, text=col.upper())
-            self.alert_table.column(col, anchor="center", width=120)
 
-        self.alert_table.tag_configure("CRITICAL", background="#b91c1c")
+            if col == "patient":
+                self.alert_table.column(col, anchor="center", width=80)
+
+            elif col == "severity":
+                self.alert_table.column(col, anchor="w", width=240)
+
+            elif col == "doctor":
+                self.alert_table.column(col, anchor="center", width=110)
+
+            elif col == "status":
+                self.alert_table.column(col, anchor="center", width=100)
+
+        self.alert_table.tag_configure("CRITICAL", background="#e88888")
         self.alert_table.tag_configure("WARNING", background="#f59e0b")
 
         self.alert_table.grid(row=1, column=0, sticky="nsew", padx=5, pady=3)
@@ -193,14 +254,24 @@ class PeachBotGUI:
         btn_bar.grid(row=2, column=0, sticky="ew", pady=5)
 
         tk.Button(btn_bar, text="Acknowledge",
-                  command=self.ack_selected,
-                  bg="#16a34a", fg="white",
-                  font=("Segoe UI", 9, "bold")).pack(side="left", padx=10)
+                command=self.ack_selected,
+                bg="#16a34a", fg="white",
+                font=("Segoe UI", 9, "bold")).pack(side="left", padx=10)
 
         tk.Button(btn_bar, text="Override",
-                  command=self.override_selected,
-                  bg="#dc2626", fg="white",
-                  font=("Segoe UI", 9, "bold")).pack(side="left", padx=10)
+                command=self.override_selected,
+                bg="#dc2626", fg="white",
+                font=("Segoe UI", 9, "bold")).pack(side="left", padx=10)
+        
+        tk.Button(btn_bar, text="Simulate Patient Arrival",
+                command=self.simulate_patient_arrival,
+                bg="#dc2626", fg="white",
+                font=("Segoe UI", 9, "bold")).pack(side="left", padx=10)
+        
+        tk.Button(btn_bar, text="Prescribe Drug",
+                command=self.prescribe_drug,
+                bg="#2563eb", fg="white",
+                font=("Segoe UI", 9, "bold")).pack(side="left", padx=10)
 
         # =========================
         # RIGHT PANEL (LOG + REASON)
@@ -289,16 +360,43 @@ class PeachBotGUI:
 
     # =========================
     def update_patients(self):
-        self.patient_table.delete(*self.patient_table.get_children())
+        # -------------------------
+        # SAVE CURRENT SELECTION
+        # -------------------------
+        selected_id = getattr(self, "selected_patient_id", None)
 
-        for p in list(self.patients.values())[:6]:
-            v = p.vitals if p.vitals else {}
+        # -------------------------
+        # CLEAR TABLE
+        # -------------------------
+        for row in self.patient_table.get_children():
+            self.patient_table.delete(row)
+
+        # -------------------------
+        # REBUILD TABLE
+        # -------------------------
+        for pid, patient in self.patients.items():
+            vitals = getattr(patient, "vitals", {})
 
             self.patient_table.insert(
                 "",
                 "end",
-                values=(p.zone, v.get("hr"), v.get("bp"), v.get("temp"))
+                iid=pid,  
+                values=(
+                    patient.patient_id,
+                    getattr(patient, "name", "N/A"),
+                    patient.zone,
+                    vitals.get("hr", "-"),
+                    vitals.get("bp", "-"),
+                    vitals.get("temp", "-")
+                )
             )
+
+        # -------------------------
+        # RESTORE SELECTION
+        # -------------------------
+        if selected_id and selected_id in self.patient_table.get_children():
+            self.patient_table.selection_set(selected_id)
+            self.patient_table.focus(selected_id)
 
     # =========================
     def update_alerts(self):
@@ -321,7 +419,26 @@ class PeachBotGUI:
                     tag = ""  # remove color → blinking
 
             issues = a.get("issues", [])
-            text = format_issue(issues[0]) if issues else ""
+
+            # SHORT ISSUE (SAFE)
+            if issues:
+                try:
+                    short_issue = format_issue(issues[0]).split("|")[0][:40]
+                except:
+                    short_issue = str(issues[0])[:40]
+            else:
+                short_issue = ""
+
+            # MERGE INTO SEVERITY COLUMN
+            rule_id = ""
+            if issues:
+                try:
+                    rule_id = issues[0].get("rule_id", "")
+                except:
+                    pass
+            severity_text = f"⚠ {a['severity']}"
+            if rule_id:
+                severity_text += f" ({rule_id})"
 
             self.alert_table.insert(
                 "",
@@ -329,8 +446,7 @@ class PeachBotGUI:
                 iid=a["id"],
                 values=(
                     a["patient_id"],
-                    "⚠ " + a["severity"],
-                    text,
+                    severity_text,
                     a["assigned_to"],
                     a["status"]
                 ),

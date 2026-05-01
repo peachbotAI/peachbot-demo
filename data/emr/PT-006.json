@@ -7,7 +7,16 @@
     "gender": "male"
   },
   "conditions": [],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Atorvastatin",
+      "generic": "Atorvastatin",
+      "dose": "NA",
+      "frequency": "NA",
+      "class": "STATIN",
+      "source": "UI_PRESCRIPTION"
+    }
+  ],
   "encounters": [],
   "allergies": [],
   "baseline_vitals": {

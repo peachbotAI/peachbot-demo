@@ -12,7 +12,16 @@
       "display": "Active Liver Disease"
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "Nimesulide",
+      "generic": "Nimesulide",
+      "dose": "NA",
+      "frequency": "NA",
+      "class": "NSAID",
+      "source": "UI_PRESCRIPTION"
+    }
+  ],
   "encounters": [],
   "allergies": [],
   "baseline_vitals": {

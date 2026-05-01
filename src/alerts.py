@@ -145,3 +145,21 @@ class AlertManager:
             self.log_alert(alert)
 
             return True
+
+    # =========================
+    # LOG EVENT
+    # =========================    
+    def log_event(self, message):
+        import datetime
+
+        timestamp = datetime.datetime.now().strftime("%H:%M:%S")
+        log_line = f"{timestamp} | {message}"
+
+        # store internally (if you already have logs list)
+        if not hasattr(self, "activity_log"):
+            self.activity_log = []
+
+        self.activity_log.append(log_line)
+
+        # keep last 100 logs
+        self.activity_log = self.activity_log[-100:]

@@ -7,8 +7,14 @@
     "gender": "female"
   },
   "conditions": [
-    {"code": "CKD", "display": "Chronic Kidney Disease"},
-    {"code": "CKD_STAGE_4", "display": "CKD Stage 4"}
+    {
+      "code": "CKD",
+      "display": "Chronic Kidney Disease"
+    },
+    {
+      "code": "CKD_STAGE_4",
+      "display": "CKD Stage 4"
+    }
   ],
   "medications": [
     {
@@ -38,6 +44,14 @@
       "dose": "5 mg",
       "frequency": "OD",
       "indication": "Hypertension control"
+    },
+    {
+      "name": "Atorvastatin",
+      "generic": "Atorvastatin",
+      "dose": "NA",
+      "frequency": "NA",
+      "class": "STATIN",
+      "source": "UI_PRESCRIPTION"
     }
   ],
   "encounters": [
