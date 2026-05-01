@@ -257,3 +257,19 @@ Singapore · India
 
 This repository is a **small, visible layer** of that system.
 
+## Version
+
+**Current Version:** v0.1.0
+
+### Release Notes
+
+**v0.1.0 — Initial Demo Release**
+- Real-time patient monitoring dashboard
+- Clinical alert system (Critical / Warning)
+- Explainable reasoning panel
+- Prescription simulation module
+- Audit logging
+- Boot sequence UI
+
+> This release represents the first public demo of the PeachBot clinical intelligence interface.
+
