@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: "PeachBot Clinical Monitoring Demo"
+message: "If you use this work, please cite it as below."
+type: software
+
+authors:
+  - family-names: "Vidya"
+    given-names: "Swapin"
+
+affiliation: "PeachBot Research & Innovations"
+
+abstract: >
+  PeachBot is a hybrid edge AI system designed for real-time clinical monitoring
+  and decision support in safety-critical environments. This repository provides
+  a demonstration interface showcasing explainable alerts, patient monitoring,
+  and constrained AI-assisted reasoning.
+
+version: "v0.1.0"
+date-released: 2026-05-01
+
+repository-code: "https://github.com/peachbotAI/peachbot-demo"
+
+keywords:
+  - Edge AI
+  - Clinical Decision Support
+  - Explainable AI
+  - Digital Health
+  - Hybrid AI Systems
+
+license: "Apache-2.0"

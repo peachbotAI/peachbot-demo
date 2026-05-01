@@ -240,6 +240,21 @@ python main.py
 * Early-stage investors aligned with deep-tech + healthcare
 
 ---
+## Citation
+
+If you use PeachBot in research or reference this work:
+
+```bibtex
+@software{peachbot2026,
+  author = {Swapin Vidya},
+  title = {PeachBot Clinical Monitoring Demo},
+  year = {2026},
+  url = {https://github.com/peachbotAI/peachbot-demo}
+}
+```
+
+
+---
 
 ## Contact
 
