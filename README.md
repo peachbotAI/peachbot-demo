@@ -264,6 +264,12 @@ If you use PeachBot in research or reference this work:
 
 
 ---
+## ⚠️ Medical Disclaimer
+
+Please review the full medical disclaimer before using this system:
+
+👉 [Medical Disclaimer](MEDICAL_DISCLAIMER.md)
+
 
 ## Contact
 
